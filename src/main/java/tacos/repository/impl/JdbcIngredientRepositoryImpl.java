@@ -1,9 +1,10 @@
-package tacos.repository;
+package tacos.repository.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import tacos.dto.Ingredient;
+import tacos.repository.IngredientRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
