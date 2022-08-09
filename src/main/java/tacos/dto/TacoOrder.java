@@ -1,7 +1,9 @@
 package tacos.dto;
 
 import lombok.Data;
+import org.springframework.data.relational.core.mapping.Column;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,6 +14,9 @@ public class TacoOrder implements Serializable {
 
     private Long id;
     private LocalDate placedAt;
+
+    @Column("customer_name")
+    @NotBlank(message="Delivery name is required")
     private String deliveryName;
     private String deliveryStreet;
     private String deliveryCity;

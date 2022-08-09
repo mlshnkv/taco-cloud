@@ -1,7 +1,9 @@
 package tacos.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -10,12 +12,18 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
+@Table
+// Exclude createdAt from equals() method so that tests won't fail trying to
+// compare java.util.Date with java.sql.Timestamp (even though they're essentially
+// equal). Need to figure out a better way than this, but excluding this property
+// for now.
+@EqualsAndHashCode(exclude = "createdAt")
 public class Taco implements Serializable {
 
     @Id
     private Long id;
 
-    private LocalDate createAt = LocalDate.now();
+    private LocalDate createdAt = LocalDate.now();
 
     @NotNull
     @Size(min = 5, message = "Name must be at least 5 characters long")
