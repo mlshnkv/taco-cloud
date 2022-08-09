@@ -1,6 +1,7 @@
 package tacos.dto;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 public class Taco implements Serializable {
 
+    @Id
     private Long id;
 
     private LocalDate createAt = LocalDate.now();
