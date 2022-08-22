@@ -1,8 +1,12 @@
 package tacos.dto;
 
 import lombok.Data;
-import org.springframework.data.relational.core.mapping.Column;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,13 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Entity
 public class TacoOrder implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private LocalDate placedAt;
 
-    @Column("customer_name")
-    @NotBlank(message="Delivery name is required")
+    @NotBlank(message = "Delivery name is required")
     private String deliveryName;
     private String deliveryStreet;
     private String deliveryCity;
@@ -25,6 +31,7 @@ public class TacoOrder implements Serializable {
     private String ccNumber;
     private String ccExpiration;
     private String ccCVV;
+    @OneToMany
     private List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco) {
