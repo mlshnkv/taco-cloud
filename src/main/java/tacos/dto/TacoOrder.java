@@ -1,12 +1,9 @@
 package tacos.dto;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -14,11 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Entity
+@Document
 public class TacoOrder implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private LocalDate placedAt;
 
@@ -31,7 +27,6 @@ public class TacoOrder implements Serializable {
     private String ccNumber;
     private String ccExpiration;
     private String ccCVV;
-    @OneToMany
     private List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco) {
