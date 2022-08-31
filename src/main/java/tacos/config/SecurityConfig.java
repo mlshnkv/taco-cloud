@@ -36,6 +36,13 @@ public class SecurityConfig {
                 .antMatchers("/design", "/orders").access("hasRole('USER')")
                 .antMatchers("/", "/**").access("permitAll()")
                 .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/design")
+                .loginProcessingUrl("/authenticate")
+                .usernameParameter("user")
+                .passwordParameter("pwd")
+                .and()
                 .build();
     }
 }
