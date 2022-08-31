@@ -36,6 +36,15 @@ public class SecurityConfig {
                 .antMatchers("/design", "/orders").access("hasRole('USER')")
                 .antMatchers("/", "/**").access("permitAll()")
                 .and()
+                //Чтобы заменить встроенную страницу входа, сначала нужно сообщить
+                // Spring Security путь к этой странице. Это можно сделать вызовом метода formLogin()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/design")
+                .loginProcessingUrl("/authenticate")
+                .usernameParameter("user")
+                .passwordParameter("pwd")
+                .and()
                 .build();
     }
 }
